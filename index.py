@@ -1,3 +1,4 @@
+from concurrent.futures import process
 from unicodedata import name
 import discord
 from discord.ext import commands # Importando comandos da pasta discord.ext do pacote discord
@@ -10,12 +11,13 @@ client = commands.Bot(command_prefix='*', intents=allIntents) #Usando intents= p
 
 @client.event
 async def on_ready():
-    print("I'm Ready!")
+    print("Olá, Mundo!")
+    print("Tudo certo. Estou Online! :D")
 
 
 @client.command(name="teste")
 async def teste(context): # Criando função (def) teste
-    await context.message.channel.send("Teste") #Enviar mensagem no mesmo canal do comando
+    await context.message.channel.send("Testado :D") #Enviar mensagem no mesmo canal do comando
 
 
 @client.command(name='avatar')
@@ -24,4 +26,4 @@ async def ping(ctx):
 
 
 
-client.run("MTAyMjI5MjA3NDY1OTMyODAyMQ.GFc_WA.07hUnpTF535JmNvLsELgcM4-cMTg7BcraxIJ0s") # Acionar bot.
+client.run("MTAyMjI5MjA3NDY1OTMyODAyMQ.GM9yDm.DO749CH6VOOYRL-wM1lKQ9_w7aK16SH2IFgMuI") # Acionar bot.
