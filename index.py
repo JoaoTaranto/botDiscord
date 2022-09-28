@@ -4,7 +4,13 @@ import discord
 from discord.ext import commands # Importando comandos da pasta discord.ext do pacote discord
 from discord.flags import Intents
 import asyncio
+import dotenv
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
+
+token = os.getenv("bot-token")
 allIntents = discord.Intents.all() # Variavel para definir todas as intents
 client = commands.Bot(command_prefix='*', intents=allIntents) #Usando intents= para declarar qual intent será usada. (No caso allIntents)
 
@@ -15,15 +21,19 @@ async def on_ready():
     print("Tudo certo. Estou Online! :D")
 
 
+############## COMANDOS
+
 @client.command(name="teste")
 async def teste(context): # Criando função (def) teste
     await context.message.channel.send("Testado :D") #Enviar mensagem no mesmo canal do comando
 
 
-@client.command(name='avatar')
+@client.command(name='ping')
 async def ping(ctx):
-    await ctx.message.channel.send(client.av)
+    clientPing = client.latency * 1000
+    roundPing = round(clientPing, 2)
+    channel = client.get_channel(1022871420340019200)
+    await channel.send(f'Olá {ctx.author.mention}, seu ping é de {roundPing}') # Concatenação com {}
 
 
-
-client.run("MTAyMjI5MjA3NDY1OTMyODAyMQ.GM9yDm.DO749CH6VOOYRL-wM1lKQ9_w7aK16SH2IFgMuI") # Acionar bot.
+client.run(token) # Acionar bot.    
